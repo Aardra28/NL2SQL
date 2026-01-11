@@ -1,0 +1,117 @@
+{
+    "appointment": {
+        "columns": {
+            "AppointmentID": "int",
+            "PatientID": "int",
+            "DoctorID": "int",
+            "AppointmentDate": "date",
+            "AppointmentStartTime": "time",
+            "AppointmentStatus": "varchar(50)",
+            "ReasonForVisit": "varchar(50)"
+        },
+        "primary_keys": [
+            "AppointmentID"
+        ],
+        "foreign_keys": [
+            {
+                "column": "PatientID",
+                "references_table": "patient",
+                "references_column": "PatientID"
+            },
+            {
+                "column": "DoctorID",
+                "references_table": "doctor",
+                "references_column": "DoctorID"
+            }
+        ]
+    },
+    "doctor": {
+        "columns": {
+            "DoctorID": "int",
+            "DoctorName": "varchar(255)",
+            "DateOfBirth": "date",
+            "DoctorGender": "enum('Male','Female','Other')",
+            "DoctorQualification": "varchar(255)",
+            "DoctorDepartmentID": "int",
+            "YearOfExperience": "smallint",
+            "IsActive": "tinyint(1)"
+        },
+        "primary_keys": [
+            "DoctorID"
+        ],
+        "foreign_keys": [
+            {
+                "column": "DoctorDepartmentID",
+                "references_table": "doctordepartment",
+                "references_column": "DepartmentID"
+            }
+        ]
+    },
+    "doctordepartment": {
+        "columns": {
+            "DepartmentID": "int",
+            "DepartmentName": "varchar(100)"
+        },
+        "primary_keys": [
+            "DepartmentID"
+        ],
+        "foreign_keys": []
+    },
+    "patient": {
+        "columns": {
+            "PatientID": "int",
+            "FirstName": "varchar(100)",
+            "LastName": "varchar(100)",
+            "Gender": "enum('Male','Female','Other')",
+            "Mobile": "varchar(15)",
+            "Email": "varchar(100)",
+            "DOB": "date",
+            "MaritalStatus": "enum('Single','Married','Divorced','Widowed')"
+        },
+        "primary_keys": [
+            "PatientID"
+        ],
+        "foreign_keys": []
+    },
+    "patientaddress": {
+        "columns": {
+            "PatientID": "int",
+            "Address": "varchar(255)",
+            "City": "varchar(100)",
+            "ZipCode": "varchar(10)",
+            "State": "varchar(100)",
+            "Country": "varchar(100)"
+        },
+        "primary_keys": [
+            "PatientID"
+        ],
+        "foreign_keys": [
+            {
+                "column": "PatientID",
+                "references_table": "patient",
+                "references_column": "PatientID"
+            }
+        ]
+    },
+    "patientmedicalbackground": {
+        "columns": {
+            "PatientID": "int",
+            "Weight": "float",
+            "BloodGroup": "enum('A+','A-','B+','B-','AB+','AB-','O+','O-')",
+            "TobaccoUsage": "tinyint(1)",
+            "AlcoholIntake": "tinyint(1)",
+            "IsDiabetic": "tinyint(1)",
+            "IsHavingBP": "tinyint(1)"
+        },
+        "primary_keys": [
+            "PatientID"
+        ],
+        "foreign_keys": [
+            {
+                "column": "PatientID",
+                "references_table": "patient",
+                "references_column": "PatientID"
+            }
+        ]
+    }
+}
